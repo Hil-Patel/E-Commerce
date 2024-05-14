@@ -1,0 +1,23 @@
+.login-form{
+    display: flex;
+    height: 80vh;
+    justify-content: center;
+    align-items: center;
+}
+.log-form{
+    box-shadow: 1px 1px 20px rgb(87, 87, 87);
+    border-radius: 30px;
+    width: 40%;
+    padding: 3rem 6rem;
+}
+.error{
+    color: red;
+}
+
+@media only screen and (max-width: 600px) {
+
+    .log-form {
+        width: 90%;
+        padding: 1.5rem;
+    }
+}
