@@ -3,9 +3,12 @@ import { useFormik } from "formik";
 import { LoginSchemas } from "../schemas/login";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { toast } from 'react-toastify';
 
-const LogInForm = () => {
+
+const LogInForm = ({changeLogStatus}) => {
   const navigate = useNavigate();
+  
   const formik = useFormik({
     initialValues: {
       username: "",
@@ -17,17 +20,16 @@ const LogInForm = () => {
         .post("https://fakestoreapi.com/auth/login", values)
         .then((res) => {
           localStorage.setItem("token", JSON.stringify(res.data.token));
+          toast.success("Log In Successful",{theme: "dark",pauseOnHover: false,});
           navigate("/home");
         })
         .catch((rej) => {
           alert("something went wrong !!");
           
         });
-        formik.values.username="";
-        formik.values.password="";
-        console.log(formik.values)
     },
   });
+  
   return (
     <div className="login-form">
       <form className="log-form mx-auto" onSubmit={formik.handleSubmit}>
@@ -72,7 +74,7 @@ const LogInForm = () => {
             onBlur={formik.handleBlur}
             placeholder="Password"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          />
+            />
 
           {formik.touched.password && formik.errors.password ? (
             <div className="error mt-1 ml-1">{formik.errors.password}</div>
