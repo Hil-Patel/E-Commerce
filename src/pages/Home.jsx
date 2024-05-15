@@ -28,7 +28,7 @@ const Home = () => {
       <div className="home-product p-10">
       {productData.length > 0 ? (
         productData.map((val) => (
-            <ItemCard key={val.id} dataval={val} />
+            <ItemCard key={val.id} dataValue={val} />
           ))
         ) : (
           <p>no data</p>

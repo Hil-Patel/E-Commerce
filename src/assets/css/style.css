@@ -35,12 +35,25 @@
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
 }
-.colapse{
-    overflow: hidden;
-    width:100%;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
+.item-card{
+    height: 680px;
+}
+.count-change{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 17px;
+    gap: 15px;
+}
+.inc-dec-btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px ;
+    height: 30px;
+    border: 1px solid rgb(0, 0, 0);
+    border-radius: 20%;
+    background-color: rgb(248, 235, 210);
 }
 .home-product{
     display: flex;

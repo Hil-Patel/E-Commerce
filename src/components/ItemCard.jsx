@@ -1,27 +1,98 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useContext } from "react";
+import { userContext } from "../routes/App";
 
 const ItemCard = ({ dataValue }) => {
   const ratingArray = useRef([]);
   const [data, setdata] = useState({});
+  const [cartItem, setCartItem] = useContext(userContext);
+  const storedIncart = useRef(false);
+  const [alreadyInCart, setAlreadyInCart] = useState(storedIncart.current);
+  const [cartItemCount,setcartItemCount] = useState(0);
+
+  const increaseCount = () => {
+    const temp = cartItem;
+    for (let index = 0; index < temp.length; index++) {
+      if (temp[index].id === data.id) {
+        temp[index].count = temp[index].count + 1;
+        setcartItemCount(temp[index].count);
+      }
+    }
+    setCartItem(temp);
+    console.log(cartItemCount);
+  };
+
+  const decreaseCount=()=>{
+    const temp = cartItem;
+    for (let index = 0; index < temp.length; index++) {
+      if (temp[index].id === data.id) {
+        temp[index].count = temp[index].count - 1;
+        setcartItemCount(temp[index].count);
+        if(cartItemCount<=1){
+          setAlreadyInCart(false);
+          storedIncart.current=false;
+          temp.splice(index,1);
+        }
+      }
+    }
+    console.log(cartItemCount);
+    setCartItem(temp);
+  }
+
+
+  const addToCart = () => {
+    setAlreadyInCart(true);
+    storedIncart.current = true;
+
+    // for (let index = 0; index < temp.length; index++) {
+    //   if(temp[index].id===data.id){
+    //     temp[index].count=temp[index].count+1;
+    //     cartItemCount.current=temp[index].count;
+    //   }
+    // }
+
+    const temp = cartItem;
+    temp.push({ ...data, count: 1 });
+    setcartItemCount(1) ;
+    setCartItem(temp);
+
+    console.log(cartItem);
+  };
 
   useEffect(() => {
     if (dataValue && dataValue.rating) {
       setdata(dataValue);
-      const rat = dataValue.rating.rate;
-      ratingArray.current.length = Math.round(rat);
-      for (let index = 0; index < Math.round(rat); index++) {
+
+      // genrating stars
+      const dataRate = dataValue.rating.rate;
+      ratingArray.current.length = Math.round(dataRate);
+      for (let index = 0; index < Math.round(dataRate); index++) {
         ratingArray.current[index] = 0;
+      }
+
+      const temp = cartItem;
+      if (storedIncart.current === false) {
+        for (let index = 0; index < temp.length; index++) {
+          if (temp[index].id === dataValue.id) {
+            storedIncart.current = true;
+            setcartItemCount ( temp[index].count);
+            setAlreadyInCart(true);
+          }
+        }
       }
     }
   }, [dataValue]);
 
   return (
-    <div className="mt-8">
-      <div className=" w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 ">
+    <div className="mt-8 ">
+      <div className="item-card w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 ">
         <div>
-          <img className="p-8 rounded-t-lg photo" src={data.image} alt="product" />
+          <img
+            className="p-8 rounded-t-lg photo"
+            src={data.image}
+            alt="product"
+          />
         </div>
         <div className="px-5 pb-5">
           <div>
@@ -49,15 +120,29 @@ const ItemCard = ({ dataValue }) => {
               {data.rating?.rate}
             </span>
           </div>
-          <div className="flex items-center mt-2.5 text-gray-500 colapse">{data.description}</div>
-          <div className="flex items-center mt-2.5 text-gray-500">Category: {data.category}</div>
-          <div className="flex items-center justify-between">
+          <div className="flex items-center mt-2.5 text-gray-500">
+            Category: {data.category}
+          </div>
+          <div className="flex items-center justify-between mt-3">
             <span className="text-3xl font-bold text-gray-900 dark:text-white">
               ${data.price}
             </span>
-            <button className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-              Add to cart
-            </button>
+            {alreadyInCart ? (
+              <div className="count-change">
+                <button className="inc-dec-btn" onClick={decreaseCount}>-</button>
+                <p>{cartItemCount}</p>
+                <button className="inc-dec-btn" onClick={increaseCount}>
+                  +
+                </button>
+              </div>
+            ) : (
+              <button
+                onClick={addToCart}
+                className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              >
+                Add to cart
+              </button>
+            )}
           </div>
         </div>
       </div>
