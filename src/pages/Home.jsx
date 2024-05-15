@@ -9,7 +9,7 @@ const Home = () => {
 
   const tempData = async () => {
     try {
-      const res = await axios.get("https://fakestoreapi.com/products?limit=5");
+      const res = await axios.get("https://fakestoreapi.com/products?limit=8");
       setproductData(res.data);
     } catch (err) {
       console.log(err);

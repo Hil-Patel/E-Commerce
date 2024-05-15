@@ -2,24 +2,23 @@
 
 import React, { useEffect, useState, useRef } from "react";
 
-const ItemCard = ({ dataval }) => {
+const ItemCard = ({ dataValue }) => {
   const ratingArray = useRef([]);
   const [data, setdata] = useState({});
 
   useEffect(() => {
-    if (dataval && dataval.rating) {
-      setdata(dataval);
-      const rat = dataval.rating.rate;
+    if (dataValue && dataValue.rating) {
+      setdata(dataValue);
+      const rat = dataValue.rating.rate;
       ratingArray.current.length = Math.round(rat);
       for (let index = 0; index < Math.round(rat); index++) {
         ratingArray.current[index] = 0;
       }
-      console.log(ratingArray.current.length);
     }
-  }, [dataval]);
+  }, [dataValue]);
 
   return (
-    <div >
+    <div className="mt-8">
       <div className=" w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 ">
         <div>
           <img className="p-8 rounded-t-lg photo" src={data.image} alt="product" />

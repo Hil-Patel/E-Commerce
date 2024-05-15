@@ -2,6 +2,7 @@ import {createBrowserRouter,RouterProvider} from "react-router-dom";
 import './App.css';
 import '../assets/css/style.css'
 import Login from "../pages/Login";
+import Product from "../pages/Product";
 import Home from "../pages/Home";
 
 
@@ -17,7 +18,7 @@ function App() {
     },
     {
       path:"/product",
-      element:<Home />
+      element:<Product />
     },
     {
       path:"/cart",

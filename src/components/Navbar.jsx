@@ -12,7 +12,7 @@ const Navbar = ({ loggedInStatus }) => {
           <img
             src={logo}
             className="h-8"
-            alt="Flowbite Logo"
+            alt="ShopCart Logo"
           />
           <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
             ShopCart

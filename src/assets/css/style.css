@@ -25,7 +25,7 @@
     background-color: rgb(223, 223, 223);
 }
 .photo{
-    object-fit: cover;
+    object-fit: contain;
     height: 500px;
 }
 .title-product{
@@ -44,8 +44,8 @@
 }
 .home-product{
     display: flex;
-    justify-content: space-around;
-    gap: 2rem;
+    flex-wrap: wrap;
+    gap: 5%;
     margin-top: 20px;
  
 }
