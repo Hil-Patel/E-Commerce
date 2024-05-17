@@ -1,8 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 
 import React, { useEffect, useState, useRef, useContext } from "react";
-import { userContext } from "../routes/App";
+import { likeContext, userContext } from "../routes/App";
 import { toast } from "react-toastify";
+import disliked from "../assets/img/disliked.jpg"
+import liked from "../assets/img/liked.png"
 
 const ItemCard = ({ dataValue }) => {
   const ratingArray = useRef([]);
@@ -11,6 +13,25 @@ const ItemCard = ({ dataValue }) => {
   const storedIncart = useRef(false);
   const [alreadyInCart, setAlreadyInCart] = useState(storedIncart.current);
   const [cartItemCount,setcartItemCount] = useState(0);
+  const [isLiked,setIsLiked]=useState(false);
+  const [like,setLike]=useContext(likeContext);
+
+  const handleLikeDislike=()=>{
+    if(isLiked){
+      setIsLiked(false);
+      const temp=like;
+      for (let index = 0; index < like.length; index++) {
+        if(like[index].id===dataValue.id){
+          temp.splice(index,1)
+          setLike(temp);
+        }
+      }
+    }
+    else{
+      setIsLiked(true);
+      setLike([...like,data]);
+    }
+  }
 
   const increaseCount = () => {
     const temp = cartItem;
@@ -43,14 +64,6 @@ const ItemCard = ({ dataValue }) => {
   const addToCart = () => {
     setAlreadyInCart(true);
     storedIncart.current = true;
-    
-    // for (let index = 0; index < temp.length; index++) {
-      //   if(temp[index].id===data.id){
-        //     temp[index].count=temp[index].count+1;
-        //     cartItemCount.current=temp[index].count;
-        //   }
-        // }
-        
         const temp = cartItem;
         temp.push({ ...data, count: 1 });
         setcartItemCount(1) ;
@@ -67,6 +80,12 @@ const ItemCard = ({ dataValue }) => {
       ratingArray.current.length = Math.round(dataRate);
       for (let index = 0; index < Math.round(dataRate); index++) {
         ratingArray.current[index] = 0;
+      }
+
+      for (let index = 0; index < like.length; index++) {
+        if(like[index].id===dataValue.id){
+          setIsLiked(true)
+        }
       }
 
       const temp = cartItem;
@@ -125,6 +144,7 @@ const ItemCard = ({ dataValue }) => {
             <span className="text-3xl font-bold text-gray-900 ">
               ${data.price}
             </span>
+            {isLiked?<img src={liked} alt="" onClick={handleLikeDislike} className="w-8"/>:<img src={disliked} alt="" onClick={handleLikeDislike} className="w-8"/>}
             {alreadyInCart ? (
               <div className="count-change">
                 <button className="inc-dec-btn" onClick={decreaseCount}>-</button>

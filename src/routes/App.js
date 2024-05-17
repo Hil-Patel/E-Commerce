@@ -6,12 +6,13 @@ import Product from "../pages/Product";
 import Home from "../pages/Home";
 import {useState,createContext} from "react";
 import Cart from "../pages/Cart";
+import Favourite from "../pages/Favourite";
 
 export const userContext=createContext();
-
+export const likeContext=createContext();
 function App() {
   const cartItem=useState([]);
-
+  const like=useState([])
   const router=createBrowserRouter([
     {
       path:"/",
@@ -29,12 +30,17 @@ function App() {
       path:"/cart",
       element:<Cart/>
     },
+    {
+      path:"/favourite",
+      element:<Favourite />
+    },
   ])
   return (
     <>
     <userContext.Provider value={cartItem}>
-
+    <likeContext.Provider value={like}>
     <RouterProvider router={router}/>
+    </likeContext.Provider>
     </userContext.Provider>
     </>
     
