@@ -11,7 +11,7 @@ const NavbarOption = () => {
   useEffect(() => {
     const intervalId = setInterval(() => {
       setUniqueItem(item.length);
-    }, 1000); // Update the interval to 1000ms (1 second) to avoid performance issues
+    }, 100); // Update the interval to 1000ms (1 second) to avoid performance issues
     return () => clearInterval(intervalId);
   }, [item]);
 
