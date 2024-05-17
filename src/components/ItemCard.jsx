@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState, useRef, useContext } from "react";
 import { userContext } from "../routes/App";
+import { toast } from "react-toastify";
 
 const ItemCard = ({ dataValue }) => {
   const ratingArray = useRef([]);
@@ -20,7 +21,6 @@ const ItemCard = ({ dataValue }) => {
       }
     }
     setCartItem(temp);
-    console.log(cartItemCount);
   };
 
   const decreaseCount=()=>{
@@ -36,7 +36,6 @@ const ItemCard = ({ dataValue }) => {
         }
       }
     }
-    console.log(cartItemCount);
     setCartItem(temp);
   }
 
@@ -44,21 +43,20 @@ const ItemCard = ({ dataValue }) => {
   const addToCart = () => {
     setAlreadyInCart(true);
     storedIncart.current = true;
-
+    
     // for (let index = 0; index < temp.length; index++) {
-    //   if(temp[index].id===data.id){
-    //     temp[index].count=temp[index].count+1;
-    //     cartItemCount.current=temp[index].count;
-    //   }
-    // }
-
-    const temp = cartItem;
-    temp.push({ ...data, count: 1 });
-    setcartItemCount(1) ;
-    setCartItem(temp);
-
-    console.log(cartItem);
-  };
+      //   if(temp[index].id===data.id){
+        //     temp[index].count=temp[index].count+1;
+        //     cartItemCount.current=temp[index].count;
+        //   }
+        // }
+        
+        const temp = cartItem;
+        temp.push({ ...data, count: 1 });
+        setcartItemCount(1) ;
+        setCartItem(temp);
+        toast.success("Added to cart successfully",{theme: "dark",pauseOnHover: false,})
+      };
 
   useEffect(() => {
     if (dataValue && dataValue.rating) {
@@ -85,8 +83,8 @@ const ItemCard = ({ dataValue }) => {
   }, [dataValue]);
 
   return (
-    <div className="mt-8 ">
-      <div className="item-card w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 ">
+    <div className="mt-8 item-card">
+      <div className=" w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow">
         <div>
           <img
             className="p-8 rounded-t-lg photo"
@@ -96,7 +94,7 @@ const ItemCard = ({ dataValue }) => {
         </div>
         <div className="px-5 pb-5">
           <div>
-            <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white title-product">
+            <h5 className="text-xl font-semibold tracking-tight text-gray-900  title-product">
               {data.title}
             </h5>
           </div>
@@ -116,7 +114,7 @@ const ItemCard = ({ dataValue }) => {
                 </>
               ))}
             </div>
-            <span className="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ms-3">
+            <span className="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded  ms-3">
               {data.rating?.rate}
             </span>
           </div>
@@ -124,7 +122,7 @@ const ItemCard = ({ dataValue }) => {
             Category: {data.category}
           </div>
           <div className="flex items-center justify-between mt-3">
-            <span className="text-3xl font-bold text-gray-900 dark:text-white">
+            <span className="text-3xl font-bold text-gray-900 ">
               ${data.price}
             </span>
             {alreadyInCart ? (
@@ -138,7 +136,7 @@ const ItemCard = ({ dataValue }) => {
             ) : (
               <button
                 onClick={addToCart}
-                className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center "
               >
                 Add to cart
               </button>

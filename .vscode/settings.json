@@ -8,6 +8,7 @@
         "Formik",
         "Incart",
         "Jewelery",
+        "setcart",
         "setdata",
         "setitem",
         "setlogged",

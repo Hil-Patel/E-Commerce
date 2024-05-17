@@ -12,6 +12,7 @@
 }
 .cart-gap{
     display: flex;
+    align-items: center;
     gap: 20px;
 }
 .cart{
@@ -26,7 +27,8 @@
 }
 .photo{
     object-fit: contain;
-    height: 500px;
+    height: 250px;
+    margin: auto;
 }
 .title-product{
     overflow: hidden;
@@ -36,7 +38,12 @@
     -webkit-box-orient: vertical;
 }
 .item-card{
-    height: 680px;
+    width: 360px;
+    
+}
+.item-card>div{
+    width: 100%;
+
 }
 .count-change{
     display: flex;
@@ -51,9 +58,8 @@
     align-items: center;
     width: 30px ;
     height: 30px;
-    border: 1px solid rgb(0, 0, 0);
-    border-radius: 20%;
-    background-color: rgb(248, 235, 210);
+    border-radius: 15%;
+    background-color: rgb(74, 156, 243);
 }
 .home-product{
     display: flex;
@@ -61,6 +67,12 @@
     gap: 5%;
     margin-top: 20px;
  
+}
+.bill{
+    margin: auto;
+    margin-bottom: 5rem;
+    width: 90%;
+    padding: 3%;
 }
 .error{
     color: red;
