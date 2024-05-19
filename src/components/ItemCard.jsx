@@ -7,13 +7,20 @@ import disliked from "../assets/img/disliked.jpg"
 import liked from "../assets/img/liked.png"
 
 const ItemCard = ({ dataValue }) => {
+  // using array length to display stars 
   const ratingArray = useRef([]);
+  //storing item data in data
   const [data, setdata] = useState({});
+  //cartItem declared in app.js
   const [cartItem, setCartItem] = useContext(userContext);
+  //using to check if product is already in cart 
   const storedIncart = useRef(false);
   const [alreadyInCart, setAlreadyInCart] = useState(storedIncart.current);
+  //used to store quantity of this product in cart
   const [cartItemCount,setcartItemCount] = useState(0);
+  //used to display if product is liked or not
   const [isLiked,setIsLiked]=useState(false);
+  //storing list of liked product
   const [like,setLike]=useContext(likeContext);
 
   const handleLikeDislike=()=>{
@@ -82,12 +89,14 @@ const ItemCard = ({ dataValue }) => {
         ratingArray.current[index] = 0;
       }
 
+      //checking if product is already like or not
       for (let index = 0; index < like.length; index++) {
         if(like[index].id===dataValue.id){
           setIsLiked(true)
         }
       }
 
+      //check the quantity of product added to cart  
       const temp = cartItem;
       if (storedIncart.current === false) {
         for (let index = 0; index < temp.length; index++) {
