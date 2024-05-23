@@ -12,7 +12,7 @@ const Cart = () => {
     <>
         <Navbar loggedInStatus={true} />
         <div className="home-product p-10">
-        {item.length>0?item.map((val)=><ItemCard key={val.id} dataValue={val}/>):null}
+        {item.length>0?item.map((val,id)=><ItemCard key={id} dataValue={val}/>):null}
         </div>
         <Bill />
 
