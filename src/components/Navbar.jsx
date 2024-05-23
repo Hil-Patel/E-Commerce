@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import NavbarOption from "./NavbarOption";
 import logo from "../assets/img/logo.png"
 
@@ -26,4 +26,4 @@ const Navbar = ({ loggedInStatus }) => {
   );
 };
 
-export default Navbar;
+export default memo(Navbar);

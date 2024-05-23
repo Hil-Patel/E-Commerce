@@ -5,9 +5,6 @@ import ItemCard from '../components/ItemCard';
 import Bill from '../components/Bill';
 const Cart = () => {
     const [item]=useContext(userContext);
-
-    
-    
   return (
     <>
         <Navbar loggedInStatus={true} />

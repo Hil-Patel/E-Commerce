@@ -15,9 +15,10 @@ const Home = () => {
       console.log(err);
     }
   };
-
+  
   useEffect(() => {
     tempData();
+    
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -27,8 +28,8 @@ const Home = () => {
       <HeroSection />
       <div className="home-product p-10">
       {productData.length > 0 ? (
-        productData.map((val) => (
-            <ItemCard key={val.id} dataValue={val} />
+        productData.map((val,id) => (
+            <ItemCard key={id} dataValue={val} />
           ))
         ) : (
           <p>no data</p>

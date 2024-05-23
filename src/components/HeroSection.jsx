@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {memo } from 'react'
 import hero from "../assets/img/hero.png"
 import { Link } from 'react-router-dom'
 
@@ -28,4 +28,4 @@ const HeroSection = () => {
   )
 }
 
-export default HeroSection
+export default memo(HeroSection)
